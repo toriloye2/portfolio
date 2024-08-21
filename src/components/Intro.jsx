@@ -2,20 +2,16 @@ import React from 'react';
 
 function Intro() {
    return (
-      <div className="flex items-center justify-start flex-col md:flex-row text-left p-6">
-         <img
-            src="/assets/toymage.jpg"
-            alt="Oriloye Toyyib"
-            className="w-32 h-32 rounded-full mb-4 md:mb-0 md:mr-6"
-         />
-         <div className="flex flex-col">
-            <h1 className="text-3xl md:text-5xl dark:text-white mb-1 font-bold">
-               Oriloye Toyyib
+      <div className="flex flex-col md:flex-row items-center justify-between p-6 md:p-12">
+         {/* Left Section: Text */}
+         <div className="flex flex-col items-start text-left md:w-1/2">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 whitespace-nowrap">
+               ORILOYE TOYYIB
             </h1>
-            <p className="text-base md:text-xl mb-3 font-medium">
+            <p className="text-lg md:text-3xl mb-6 font-bold">
                Full-Stack Web Developer
             </p>
-            <p className="text-lg max-w-xl mb-6 font-bold">
+            <p className="text-lg md:text-xl mb-6">
                I'm a full-stack developer passionate about building efficient and scalable web applications.
                My journey in coding involves hands-on experience in both frontend and backend development.
                From planning and designing to deploying and maintaining, I enjoy solving real-world problems with code.
@@ -23,6 +19,39 @@ function Intro() {
                I strive to continually improve my skills and share my knowledge with the developer community.
                Let's build something amazing together!
             </p>
+            <div className="flex items-center">
+               <a
+                  href="mailto:taiyeolabamiji@gmail.com"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black border-2 border-blue-600 transition-colors duration-300 mr-4"
+               >
+                  CONTACT ME
+               </a>
+               <a
+                  href="https://www.linkedin.com/in/toriloye2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl text-gray-700 hover:text-blue-600 mr-4"
+               >
+                  <i className="fab fa-linkedin"></i> {/* LinkedIn Icon */}
+               </a>
+               <a
+                  href="https://github.com/toriloye2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl text-gray-700 hover:text-blue-600"
+               >
+                  <i className="fab fa-github"></i> {/* GitHub Icon */}
+               </a>
+            </div>
+         </div>
+
+         {/* Right Section: Image */}
+         <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center">
+            <img
+               src="/assets/toyyib.jpg"  // Correct this path if needed
+               alt="Oriloye Toyyib"
+               className="w-72 h-72 object-cover rounded-lg shadow-lg"
+            />
          </div>
       </div>
    );
