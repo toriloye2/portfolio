@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Intro from './components/Intro';
 import Portfolio from './components/Portfolio';
 import Timeline from './components/Timeline';
+import Skills from './components/Skills'
 
 function App() {
 	const [theme, setTheme] = useState(null);
@@ -76,6 +77,7 @@ function App() {
 				<Intro />
 				<Portfolio />
 				<Timeline />
+        <Skills/>
 				<Contact />
 				<Footer />
 			</div>
