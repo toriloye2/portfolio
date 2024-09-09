@@ -1,20 +1,20 @@
 import React from 'react';
-import timeline from '../data/timeline';
 import TimelineItem from './TimelineItem';
+import timelineData from '../data/timeline';
 import Title from './Title';
 
 function Timeline() {
    return (
-      <div className="flex flex-col md:flex-row justify-center my-20">
-         <div className="w-full ">
-            <Title>Timeline</Title>
-            {timeline.map((item, index) => (
+      <div className="container mx-auto p-10">
+         <Title>Timeline</Title>
+         <div className="relative">
+            {timelineData.map((item, index) => (
                <TimelineItem
-                  key={index}  // Added key prop for better performance
+                  key={index}
                   year={item.year}
                   title={item.title}
-                  duration={item.duration}
                   details={item.details}
+                  side={index % 2 === 0 ? 'left' : 'right'}
                />
             ))}
          </div>
