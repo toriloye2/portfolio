@@ -2,17 +2,7 @@ import React from 'react';
 
 function Intro() {
    return (
-      <div className="relative"> {/* Set relative positioning for this container */}
-         {/* Top Right Button: View Resume */}
-         <a
-            href="/assets/ORILOYETOYYIBW_techResume - -real.pdf"  // Update with the correct path to your resume
-            target="_blank"  // Open the resume in a new tab for viewing
-            rel="noopener noreferrer"  // Security measure to prevent security risks
-            className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black border-2 border-green-500 transition-colors duration-300 z-50"
-         >
-            MY RESUME
-         </a>
-
+      <div className="relative">
          {/* Main Content */}
          <div className="flex flex-col md:flex-row items-center justify-between p-6 md:p-12">
             {/* Left Section: Text */}

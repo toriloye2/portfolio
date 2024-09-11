@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Intro from './components/Intro';
 import Portfolio from './components/Portfolio';
 import Timeline from './components/Timeline';
-import Skills from './components/Skills'
+import Skills from './components/Skills';
 
 function App() {
 	const [theme, setTheme] = useState(null);
@@ -63,27 +63,38 @@ function App() {
 		</svg>
 	);
 
-  return (
-	<>
-		<button
-			type="button"
-			onClick={handleThemeSwitch}
-			className="fixed p-2 z-10 right-20 top-4 bg-violet-300 dark:bg-orange-300 text-lg p-1 rounded-md"
-		>
-			{theme === 'dark' ? sun : moon}
-		</button>
-		<div className="bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-300 min-h-screen font-inter">
-			<div className="max-w-5xl w-11/12 mx-auto">
-				<Intro />
-				<Portfolio />
-				<Timeline />
-        <Skills/>
-				<Contact />
-				<Footer />
+	return (
+		<>
+			<button
+				type="button"
+				onClick={handleThemeSwitch}
+				className="fixed p-2 z-10 right-10 top-6 bg-violet-300 dark:bg-orange-300 text-lg p-1 rounded-md"
+			>
+				{theme === 'dark' ? sun : moon}
+			</button>
+			<div className="relative">
+				{/* Top Right Button: View Resume */}
+				<a
+					href="/assets/ORILOYETOYYIBW_techResume - -real.pdf" // Update with the correct path to your resume
+					target="_blank" // Open the resume in a new tab for viewing
+					rel="noopener noreferrer" // Security measure to prevent security risks
+					className="absolute top-4 right-20 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black border-2 border-blue-600 transition-colors duration-300 mr-4"
+				>
+					MY RESUME
+				</a>
 			</div>
-		</div>
-	 </>
-  )
+			<div className="bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-300 min-h-screen font-inter">
+				<div className="max-w-5xl w-11/12 mx-auto">
+					<Intro />
+					<Portfolio />
+					<Timeline />
+					<Skills />
+					<Contact />
+					<Footer />
+				</div>
+			</div>
+		</>
+	);
 }
 
-export default App
+export default App;
