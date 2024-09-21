@@ -27,7 +27,7 @@ function PortfolioItem({ title, imgUrl, stack, link }) {
                {stack.map((item, index) => (
                   <span
                      key={index}
-                     className="text-sm font-semibold bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-1 px-3 rounded-full shadow-md transition-colors duration-300 group-hover:bg-white-500 group-hover:text-gray-500"
+                     className="text-sm font-semibold bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-1 px-3 rounded-full shadow-md transition-colors duration-300 group-hover:bg-gray-500 group-hover:text-white"
                   >
                      {item}
                   </span>

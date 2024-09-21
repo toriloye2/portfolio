@@ -2,7 +2,7 @@ export default [
 
    {
      title: 'Tourism Website',
-     imgUrl: './assets/tours pic.png',
+     imgUrl: './assets/tourrs.png',
      stack: ['HTML ,CSS ,JAVASCRIPT'],
      link: 'https://toriloye2.github.io/Tourism_website/index.html',
 
