@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Define marquee keyframes */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -11,23 +12,14 @@
   }
 }
 
+/* Apply the marquee animation */
 .animate-marquee {
   display: flex;
-  width: calc(200%);
-  animation: marquee 15s linear infinite;
-  animation-play-state: paused; /* Start paused */
-}
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  width: calc(200%); /* Ensures enough space for scrolling */
+  animation: marquee 15s linear infinite; /* Adjust speed as needed */
 }
 
-.animate-marquee {
-  display: flex;
-  animation: marquee 30s linear infinite; /* Adjust speed as needed */
-  width: calc(200%); /* Double the width to accommodate duplicated content */
+/* Pause animation on hover */
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
