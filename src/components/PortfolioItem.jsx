@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaInfoCircle } from 'react-icons/fa'; // Info icon import
+// import { FaInfoCircle } from 'react-icons/fa'; // Info icon import
 
 function PortfolioItem({ title, imgUrl, info, stack, link }) {
    const [showModal, setShowModal] = useState(false); // State to handle modal visibility
@@ -42,7 +42,7 @@ function PortfolioItem({ title, imgUrl, info, stack, link }) {
             {/* Info Icon to open modal */}
             <div className="flex justify-end">
                <button onClick={handleModalToggle} className="text-gray-500 hover:text-gray-700 dark:text-white">
-                  <FaInfoCircle size={28} /> {/* Increased icon size */}
+                  <i className="fas fa-info-circle" style={{ fontSize: '28px' }}></i> {/* Corrected icon class and size */}
                </button>
             </div>
          </div>
