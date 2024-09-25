@@ -74,14 +74,7 @@ function App() {
 			</button>
 			<div className="relative">
 				{/* Top Right Button: View Resume */}
-				<a
-					href="/assets/ORILOYETOYYIBW_techResume - -real.pdf" // Update with the correct path to your resume
-					target="_blank" // Open the resume in a new tab for viewing
-					rel="noopener noreferrer" // Security measure to prevent security risks
-					className="absolute top-4 right-20 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black border-2 border-blue-600 transition-colors duration-300 mr-4"
-				>
-					MY RESUME
-				</a>
+
 			</div>
 			<div className="bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-300 min-h-screen font-inter">
 				<div className="max-w-5xl w-11/12 mx-auto">
