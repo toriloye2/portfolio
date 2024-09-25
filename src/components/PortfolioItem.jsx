@@ -50,7 +50,7 @@ function PortfolioItem({ title, imgUrl, info, stack, link }) {
             </div>
 
             {/* Back of the card */}
-            <div className="absolute w-full h-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg shadow-lg rotate-y-180 backface-hidden overflow-y-auto overflow-x-hidden"> {/* Scroll Y, hide X */}
+            <div className="absolute w-full h-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg shadow-lg rotate-y-180 backface-hidden overflow-y-auto overflow-x-hidden custom-scrollbar"> {/* Custom Y scroll, hide X */}
                <div className="p-6">
                   <h4 className="text-3xl font-bold mb-4 text-center">About</h4>
                   <p className="mb-8 text-lg">
