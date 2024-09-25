@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaArrowLeft } from 'react-icons/fa'; // Font Awesome icon import for Go Back button
 
 function PortfolioItem({ title, imgUrl, info, stack, link }) {
    const [isFlipped, setIsFlipped] = useState(false); // State to handle flip
@@ -51,7 +50,7 @@ function PortfolioItem({ title, imgUrl, info, stack, link }) {
             </div>
 
             {/* Back of the card */}
-            <div className="absolute w-full h-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg shadow-lg rotate-y-180 backface-hidden overflow-y-auto overflow-x-hidden scroll-custom"> {/* Added .scroll-custom class */}
+            <div className="absolute w-full h-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg shadow-lg rotate-y-180 backface-hidden overflow-y-auto overflow-x-hidden"> {/* Scroll Y, hide X */}
                <div className="p-6">
                   <h4 className="text-3xl font-bold mb-4 text-center">About</h4>
                   <p className="mb-8 text-lg">
@@ -70,7 +69,8 @@ function PortfolioItem({ title, imgUrl, info, stack, link }) {
                      className="mt-8 flex items-center justify-center px-8 py-3 bg-red-500 text-white text-lg rounded-md hover:bg-red-600 w-md"
                      onClick={handleFlip}
                   >
-                     <FaArrowLeft className="mr-2" /> {/* Font Awesome "Go Back" Icon */}
+                     <i className="fas fa-arrow-left mr-2"></i> {/* FontAwesome icon for "Go Back" */}
+
                   </button>
                </div>
             </div>
