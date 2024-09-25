@@ -7,9 +7,9 @@ export default [
     link: 'https://toriloye2.github.io/Tourism_website/index.html',
   },
   {
-    title: 'Football Blog',
+    title: 'Soccer Blog',
     imgUrl: './assets/soccer.png',
-    info: 'This CMS-style football blog allows users to create their own player profiles, categorize players, upload images, make comments, and organize content by categories. It showcases my skills in building interactive and dynamic web apps, with a strong focus on user engagement and content management.',
+    info: 'Content Management System (CMS) using PHP and MySQL.Designed a database for website content and implemented secure user access. Built PHP functionalities for CRUD operations and optimized database queries.Created a user-friendly CMS for efficient website content management. ',
     stack: ['PHP', 'JavaScript', 'Bootstrap'],
     link: 'www.unitatours.com',
   },
