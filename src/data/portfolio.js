@@ -15,7 +15,7 @@ export default [
   },
   {
     title: 'Portfolio',
-    imgUrl: '',
+    imgUrl: './assets/portfolio.png',
     info: 'This portfolio was built with React, using Tailwind CSS for the design. I focused on clean code and modularity while showcasing my projects and skills in a responsive and interactive layout.',
     stack: ['React', 'JavaScript', 'Tailwind CSS', 'Vite'],
     link: 'https://bamiji.netlify.app/',
