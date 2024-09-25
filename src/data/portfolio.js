@@ -8,7 +8,7 @@ export default [
   },
   {
     title: 'Football Blog',
-    imgUrl: '',
+    imgUrl: './assets/soccer.png',
     info: 'This CMS-style football blog allows users to create their own player profiles, categorize players, upload images, make comments, and organize content by categories. It showcases my skills in building interactive and dynamic web apps, with a strong focus on user engagement and content management.',
     stack: ['PHP', 'JavaScript', 'Bootstrap'],
     link: 'www.unitatours.com',
