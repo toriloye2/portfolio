@@ -11,10 +11,10 @@ export default [
     imgUrl: './assets/soccer.png',
     info: 'Content Management System (CMS) using PHP and MySQL.Designed a database for website content and implemented secure user access. Built PHP functionalities for CRUD operations and optimized database queries.Created a user-friendly CMS for efficient website content management. ',
     stack: ['PHP', 'JavaScript', 'Bootstrap','MySql'],
-    link: 'www.unitatours.com',
+    link: 'https://tblog-e877948a3d83.herokuapp.com/index.php',
   },
   {
-    title: 'Portfolio',
+    title: 'Minimal Portfolio',
     imgUrl: './assets/portfolio.png',
     info: 'This portfolio was built with React, using Tailwind CSS for the design. I focused on clean code and modularity while showcasing my projects and skills in a responsive and interactive layout.',
     stack: ['React', 'JavaScript', 'Tailwind CSS', 'Vite'],
