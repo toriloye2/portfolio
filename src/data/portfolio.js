@@ -9,7 +9,7 @@ export default [
   {
     title: 'Soccer Blog',
     imgUrl: './assets/soccer.png',
-    info: 'Content Management System (CMS) using PHP and MySQL.Designed a database for website content and implemented secure user access. Built PHP functionalities for CRUD operations and optimized database queries.Created a user-friendly CMS for efficient website content management. ',
+    info: 'Content Management System (CMS) using PHP and MySQL.Designed a database for website content and implemented secure user access. Built PHP functionalities for CRUD operations and optimized database queries. Created a user-friendly CMS for efficient website content management. ',
     stack: ['PHP', 'JavaScript', 'Bootstrap','MySql'],
     link: 'https://tblog-e877948a3d83.herokuapp.com/index.php',
   },
