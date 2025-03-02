@@ -10,7 +10,7 @@ export default [
     title: 'Soccer Blog',
     imgUrl: './assets/soccer.png',
     info: 'Content Management System (CMS) using PHP and MySQL.Designed a database for website content and implemented secure user access. Built PHP functionalities for CRUD operations and optimized database queries. Created a user-friendly CMS for efficient website content management. ',
-    stack: ['PHP', 'JavaScript', 'Bootstrap','MySql'],
+    stack: ['PHP', 'JavaScript', 'Bootstrap','PostgresQl'],
     link: 'https://tblog-e877948a3d83.herokuapp.com/index.php',
   },
   {
@@ -20,13 +20,13 @@ export default [
     stack: ['React', 'JavaScript', 'Tailwind CSS', 'Vite'],
     link: 'https://bamiji.netlify.app/',
   },
-//   {
-//     title: 'Task Tracker',
-//     imgUrl: './assets/trello.png',
-//     info: 'Developed a task management tool similar to Trello using Ant Design and SCSS for styling, with React and TypeScript for building the frontend logic. This project focuses on task organization with drag-and-drop functionality and a modern, scalable UI.',
-//     stack: ['React', 'TypeScript', 'SCSS', 'Ant Design'],
-//     link: 'https://apmware.netlify.app/',
-//  },
+  {
+    title: 'Task Tracker',
+    imgUrl: './assets/trello.png',
+    info: 'Developed a task management tool similar to Trello using Ant Design and SCSS for styling, with React and TypeScript for building the frontend logic. This project focuses on task organization with drag-and-drop functionality and a modern, scalable UI.',
+    stack: ['React', 'TypeScript', 'SCSS', 'Ant Design'],
+    link: 'https://apmware.netlify.app/',
+ },
  {
     title: 'Park Search',
     imgUrl: './assets/parksearch.png',
