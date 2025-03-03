@@ -5,7 +5,7 @@ function Intro() {
       <div className="relative">
          {/* Resume Button positioned at the top-right with inline styles */}
          <a
-            href="/assets/ORILOYETOYYIBW_techResume - -real.pdf" // Updated the path with your specified resume path
+            href="/assets/ORILOYE_TOYYIB_Resume.pdf" // Updated the path with your specified resume path
             target="_blank" // Opens the resume in a new tab for viewing
             rel="noopener noreferrer" // Security measure to prevent security risks
             style={{
