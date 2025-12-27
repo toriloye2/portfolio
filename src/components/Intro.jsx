@@ -1,35 +1,12 @@
-import React from 'react';
-
 function Intro() {
    return (
-      <div className="relative">
-         {/* Resume Button positioned at the top-right with inline styles */}
+      <div className="relative pt-16 md:pt-8">
+         {/* Resume Button */}
          <a
-            href="/assets/ORILOYE_TOYYIB_Resume.pdf" // Updated the path with your specified resume path
-            target="_blank" // Opens the resume in a new tab for viewing
-            rel="noopener noreferrer" // Security measure to prevent security risks
-            style={{
-               position: 'absolute',
-               top: '20px',
-               right: '20px',
-               backgroundColor: '#1D4ED8', // Tailwind's blue-600 color
-               color: 'white',
-               padding: '8px 16px',
-               borderRadius: '9999px', // Makes it fully rounded
-               fontSize: '14px', // Smaller text size
-               fontWeight: 'bold',
-               border: '2px solid #1D4ED8', // Same as background color
-               cursor: 'pointer',
-               transition: 'background-color 0.3s, color 0.3s',
-            }}
-            onMouseOver={(e) => {
-               e.target.style.backgroundColor = 'white';
-               e.target.style.color = 'black'; // Turns text black on hover
-            }}
-            onMouseOut={(e) => {
-               e.target.style.backgroundColor = '#1D4ED8';
-               e.target.style.color = 'white';
-            }}
+            href="/assets/ORILOYE_TOYYIB_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-4 right-4 md:top-5 md:right-5 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold border-2 border-blue-600 hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-md hover:shadow-lg"
          >
             MY RESUME
          </a>

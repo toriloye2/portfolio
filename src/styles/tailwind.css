@@ -36,12 +36,13 @@
    transform-style: preserve-3d;
 }
 
-.relative {
+/* Card flip container - use specific class to avoid overriding Tailwind utilities */
+.card-inner {
    position: relative;
    transform-style: preserve-3d;
 }
 
-.absolute {
+.card-face {
    position: absolute;
    top: 0;
    left: 0;

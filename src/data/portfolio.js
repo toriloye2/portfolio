@@ -1,5 +1,12 @@
 export default [
   {
+    title: 'Shiftii',
+    imgUrl: './assets/shiftii.png',
+    info: 'A smart shift management platform for hospitals and organizations. Features AI-powered shift swap suggestions using OpenAI API, real-time database with Supabase, and role-based access control. Enables employees to view, claim, and request shift swaps while giving managers full visibility and control.',
+    stack: ['React', 'Supabase', 'OpenAI API', 'Tailwind CSS', 'JavaScript'],
+    link: 'https://shiftii-frontend.vercel.app/',
+  },
+  {
     title: 'Tourism Website',
     imgUrl: './assets/tourrs.png',
     info: 'This static website showcases my ability to create visually appealing layouts with HTML, CSS, and JavaScript. It serves as a demo for presenting static content in an organized and user-friendly manner.',
@@ -10,7 +17,7 @@ export default [
     title: 'Soccer Blog',
     imgUrl: './assets/soccer.png',
     info: 'Content Management System (CMS) using PHP and MySQL.Designed a database for website content and implemented secure user access. Built PHP functionalities for CRUD operations and optimized database queries. Created a user-friendly CMS for efficient website content management. ',
-    stack: ['PHP', 'JavaScript', 'Bootstrap','PostgresQl'],
+    stack: ['PHP', 'JavaScript', 'Bootstrap', 'PostgreSQL'],
     link: 'https://tblog-e877948a3d83.herokuapp.com/index.php',
   },
   {
