@@ -1,5 +1,12 @@
 export default [
 	{
+		 year: '2025',
+		 title: 'Software Developer (Agile Team) - Blackforce Inc.',
+		 duration: 'Aug 2025 – Dec 2025',
+		 details:
+				'Designed and implemented secure, object-oriented RESTful APIs using C# and .NET, aligned with enterprise SDLC and OOP practices. Built dynamic UIs using React and TypeScript with AJAX for client-side interactivity. Developed and optimized SQL Server stored procedures for transactional workflows. Collaborated with senior developers to gather requirements and troubleshoot issues. Performed debugging and production troubleshooting. Participated in Agile sprint cycles, code reviews, and documentation. Contributed to cloud deployment using Vercel and Render.',
+	},
+	{
 		 year: '2024',
 		 title: 'Web Application Developer Intern (Agile Team) - Ace Project Space',
 		 duration: 'April 2024 – Aug 2024',
