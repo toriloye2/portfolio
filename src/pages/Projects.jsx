@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
 import portfolio from '../data/portfolio';
 import ProjectCard from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
 
 const filters = ['All', 'Full Stack', 'Frontend'];
 
 function Projects() {
 	const [activeFilter, setActiveFilter] = useState('All');
+	const [selectedProject, setSelectedProject] = useState(null);
 
 	const filteredProjects = activeFilter === 'All'
 		? portfolio
@@ -14,7 +16,7 @@ function Projects() {
 
 	return (
 		<div className="min-h-screen bg-stone-950 py-16 px-4">
-			<div className="max-w-6xl mx-auto">
+			<div className="max-w-4xl mx-auto">
 				{/* Header */}
 				<motion.div
 					className="text-center mb-12"
@@ -55,16 +57,32 @@ function Projects() {
 				</motion.div>
 
 				{/* Projects grid with layout animation */}
-				<motion.div
-					layout
-					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
-				>
-					<AnimatePresence mode="popLayout">
-						{filteredProjects.map((project) => (
-							<ProjectCard key={project.id} project={project} />
-						))}
+				<LayoutGroup>
+					<motion.div
+						layout
+						className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+					>
+						<AnimatePresence mode="popLayout">
+							{filteredProjects.map((project) => (
+								<ProjectCard
+									key={project.id}
+									project={project}
+									onClick={() => setSelectedProject(project)}
+								/>
+							))}
+						</AnimatePresence>
+					</motion.div>
+
+					{/* Modal */}
+					<AnimatePresence>
+						{selectedProject && (
+							<ProjectModal
+								project={selectedProject}
+								onClose={() => setSelectedProject(null)}
+							/>
+						)}
 					</AnimatePresence>
-				</motion.div>
+				</LayoutGroup>
 
 				{/* Empty state */}
 				{filteredProjects.length === 0 && (
