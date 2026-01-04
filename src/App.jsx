@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import Contact from './components/Contact';
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Intro from './components/Intro';
-import Portfolio from './components/Portfolio';
-import Timeline from './components/Timeline';
-import Skills from './components/Skills';
 
 function App() {
 	const [theme, setTheme] = useState(null);
@@ -64,26 +61,29 @@ function App() {
 	);
 
 	return (
-		<>
+		<div className="bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-300 min-h-screen font-inter">
+			<Navbar />
+
+			{/* Theme Toggle Button */}
 			<button
 				type="button"
 				onClick={handleThemeSwitch}
 				aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-				className="fixed p-2 z-10 right-10 top-6 bg-violet-300 dark:bg-orange-300 rounded-md shadow-lg hover:scale-110 transition-transform duration-200"
+				className="fixed p-2 z-40 right-6 top-20 bg-violet-300 dark:bg-orange-300 rounded-md shadow-lg hover:scale-110 transition-transform duration-200"
 			>
 				{theme === 'dark' ? sun : moon}
 			</button>
-			<div className="bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-300 min-h-screen font-inter">
-				<div className="max-w-5xl w-11/12 mx-auto">
-					<Intro />
-					<Portfolio />
-					<Timeline />
-					<Skills />
-					<Contact />
-					<Footer />
-				</div>
+
+			{/* Page Content */}
+			<main>
+				<Outlet />
+			</main>
+
+			{/* Footer */}
+			<div className="max-w-5xl w-11/12 mx-auto">
+				<Footer />
 			</div>
-		</>
+		</div>
 	);
 }
 
