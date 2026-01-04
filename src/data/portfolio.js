@@ -4,7 +4,7 @@ export default [
     title: 'Shiftii',
     imgUrl: './assets/shiftii.png',
     info: 'A smart shift management platform for hospitals and organizations. Features AI-powered shift swap suggestions using OpenAI API, real-time database with Supabase, and role-based access control.',
-    stack: ['React', 'Supabase', 'OpenAI API', 'Tailwind CSS', 'JavaScript'],
+    stack: ['Next.js', 'Tailwind CSS', 'Supabase', 'Python', 'Django', 'OpenAI API'],
     category: 'Full Stack',
     link: 'https://shiftii-frontend.vercel.app/',
   },

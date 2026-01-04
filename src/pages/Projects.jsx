@@ -15,7 +15,7 @@ function Projects() {
 		: portfolio.filter(project => project.category === activeFilter);
 
 	return (
-		<div className="min-h-screen bg-stone-950 py-16 px-4">
+		<div className="min-h-screen py-16 px-4">
 			<div className="max-w-4xl mx-auto">
 				{/* Header */}
 				<motion.div
@@ -24,10 +24,10 @@ function Projects() {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					<h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+					<h1 className="text-5xl md:text-7xl font-bold text-stone-900 dark:text-white mb-6">
 						My Projects
 					</h1>
-					<p className="text-stone-400 text-lg max-w-2xl mx-auto">
+					<p className="text-stone-500 dark:text-stone-400 text-lg max-w-2xl mx-auto">
 						A collection of projects showcasing my skills in web development
 					</p>
 				</motion.div>
