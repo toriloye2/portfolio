@@ -14,7 +14,7 @@ function ProjectCard({ project, onClick }) {
 			{/* Accent dot */}
 			<motion.div
 				layoutId={`dot-${project.id}`}
-				className="absolute top-4 left-4 z-10 w-4 h-4 bg-blue-500 rounded-full"
+				className="absolute top-4 left-4 z-10 w-4 h-4 bg-blue-500 dark:bg-orange-500 rounded-full"
 			/>
 
 			{/* Image section - full card */}
