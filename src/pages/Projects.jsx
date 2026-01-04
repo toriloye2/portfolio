@@ -45,8 +45,8 @@ function Projects() {
 							onClick={() => setActiveFilter(filter)}
 							className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
 								activeFilter === filter
-									? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25'
-									: 'bg-stone-800 text-stone-400 hover:bg-stone-700 hover:text-white'
+									? 'bg-blue-500 dark:bg-orange-500 text-white shadow-lg shadow-blue-500/25 dark:shadow-orange-500/25'
+									: 'bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-300 dark:hover:bg-stone-700 hover:text-stone-900 dark:hover:text-white'
 							}`}
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}

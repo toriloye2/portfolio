@@ -48,7 +48,7 @@ const Skills = () => {
 						whileTap={{ scale: 0.95 }}
 						className="group cursor-pointer"
 					>
-						<div className="flex flex-col items-center p-4 rounded-2xl bg-stone-100 dark:bg-stone-700/50 hover:bg-gradient-to-br hover:from-violet-100 hover:to-blue-100 dark:hover:from-violet-900/30 dark:hover:to-blue-900/30 transition-colors duration-300">
+						<div className="flex flex-col items-center p-4 rounded-2xl bg-stone-100 dark:bg-stone-700/50 hover:bg-gradient-to-br hover:from-violet-100 hover:to-blue-100 dark:hover:from-orange-900/30 dark:hover:to-yellow-900/30 transition-colors duration-300">
 							<div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center mb-3">
 								<i className={`${skill.icon} text-4xl md:text-5xl transition-transform duration-300 group-hover:scale-110`}></i>
 							</div>
