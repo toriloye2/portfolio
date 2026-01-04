@@ -1,177 +1,41 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import timelineData from '../data/timeline';
 
-function TimelineCard({ item, index, isActive, totalItems }) {
-	const cardRef = useRef(null);
-	const isInView = useInView(cardRef, { margin: '-40% 0px -40% 0px' });
-	const isLeft = index % 2 === 0;
-
-	return (
-		<div
-			ref={cardRef}
-			className={`flex items-center gap-8 mb-16 last:mb-0 ${
-				isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-			} flex-col md:flex-row`}
-		>
-			{/* Year */}
-			<motion.div
-				className={`md:w-32 flex-shrink-0 ${isLeft ? 'md:text-right' : 'md:text-left'} text-center`}
-				initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-				whileInView={{ opacity: 1, x: 0 }}
-				viewport={{ once: true, margin: '-100px' }}
-				transition={{ duration: 0.5, delay: 0.1 }}
-			>
-				<span className={`text-3xl md:text-4xl font-bold transition-colors duration-300 ${
-					isActive
-						? 'text-blue-500'
-						: 'text-stone-300 dark:text-stone-600'
-				}`}>
-					{item.year}
-				</span>
-			</motion.div>
-
-			{/* Center dot and line connector */}
-			<div className="relative flex-shrink-0 hidden md:flex flex-col items-center">
-				<motion.div
-					className={`w-4 h-4 rounded-full border-4 transition-all duration-300 ${
-						isActive
-							? 'bg-blue-500 border-blue-500 scale-125'
-							: 'bg-white dark:bg-stone-800 border-stone-300 dark:border-stone-600'
-					}`}
-					initial={{ scale: 0 }}
-					whileInView={{ scale: 1 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.3, delay: 0.2 }}
-				/>
-			</div>
-
-			{/* Card */}
-			<motion.div
-				className={`flex-1 max-w-xl transition-all duration-500 ${
-					isActive
-						? 'opacity-100 scale-100'
-						: 'opacity-40 scale-[0.98] blur-[1px]'
-				}`}
-				initial={{
-					opacity: 0,
-					x: isLeft ? 50 : -50,
-					scale: 0.95
-				}}
-				whileInView={{
-					opacity: isActive ? 1 : 0.4,
-					x: 0,
-					scale: isActive ? 1 : 0.98
-				}}
-				viewport={{ once: true, margin: '-100px' }}
-				transition={{ duration: 0.6, delay: 0.3 }}
-			>
-				<div className={`p-6 rounded-2xl border-l-4 transition-all duration-300 ${
-					isActive
-						? 'bg-white dark:bg-stone-800 border-blue-500 shadow-xl shadow-blue-500/10'
-						: 'bg-stone-50 dark:bg-stone-800/50 border-stone-200 dark:border-stone-700'
-				}`}>
-					{/* Title */}
-					<motion.h3
-						className={`text-xl font-bold mb-2 transition-colors duration-300 ${
-							isActive
-								? 'text-stone-900 dark:text-white'
-								: 'text-stone-500 dark:text-stone-400'
-						}`}
-						initial={{ opacity: 0, y: 10 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.4, delay: 0.4 }}
-					>
-						{item.title}
-					</motion.h3>
-
-					{/* Duration badge */}
-					<motion.span
-						className={`inline-block text-sm px-3 py-1 rounded-full mb-4 transition-colors duration-300 ${
-							isActive
-								? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-								: 'bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400'
-						}`}
-						initial={{ opacity: 0, y: 10 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.4, delay: 0.5 }}
-					>
-						{item.duration}
-					</motion.span>
-
-					{/* Details */}
-					<motion.p
-						className={`text-sm leading-relaxed transition-colors duration-300 ${
-							isActive
-								? 'text-stone-600 dark:text-stone-300'
-								: 'text-stone-400 dark:text-stone-500'
-						}`}
-						initial={{ opacity: 0, y: 10 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.4, delay: 0.6 }}
-					>
-						{item.details}
-					</motion.p>
-				</div>
-			</motion.div>
-		</div>
-	);
-}
-
 function Timeline() {
-	const containerRef = useRef(null);
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [isPaused, setIsPaused] = useState(false);
+	const intervalRef = useRef(null);
 
-	// Track scroll progress for the line
-	const { scrollYProgress } = useScroll({
-		target: containerRef,
-		offset: ['start center', 'end center']
-	});
-
-	// Transform scroll progress to line height
-	const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
-	// Update active index based on scroll
+	// Auto-advance cards
 	useEffect(() => {
-		const handleScroll = () => {
-			if (!containerRef.current) return;
+		if (isPaused) return;
 
-			const container = containerRef.current;
-			const cards = container.querySelectorAll('[data-timeline-card]');
-			const containerRect = container.getBoundingClientRect();
-			const viewportCenter = window.innerHeight / 2;
+		intervalRef.current = setInterval(() => {
+			setActiveIndex((prev) => (prev + 1) % timelineData.length);
+		}, 2000); // 2 seconds
 
-			let closestIndex = 0;
-			let closestDistance = Infinity;
+		return () => clearInterval(intervalRef.current);
+	}, [isPaused]);
 
-			cards.forEach((card, index) => {
-				const cardRect = card.getBoundingClientRect();
-				const cardCenter = cardRect.top + cardRect.height / 2;
-				const distance = Math.abs(cardCenter - viewportCenter);
+	// Handle click to pause/resume
+	const handleClick = () => {
+		setIsPaused(!isPaused);
+	};
 
-				if (distance < closestDistance) {
-					closestDistance = distance;
-					closestIndex = index;
-				}
-			});
+	// Manual navigation
+	const goToCard = (index) => {
+		setActiveIndex(index);
+		setIsPaused(true);
+	};
 
-			setActiveIndex(closestIndex);
-		};
-
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		handleScroll();
-
-		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
+	const activeItem = timelineData[activeIndex];
 
 	return (
 		<div className="py-12">
 			{/* Header */}
 			<motion.h2
-				className="text-3xl md:text-4xl font-bold mb-16 text-center text-stone-900 dark:text-white"
+				className="text-3xl md:text-4xl font-bold mb-12 text-center text-stone-900 dark:text-white"
 				initial={{ opacity: 0, y: -20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
@@ -180,28 +44,136 @@ function Timeline() {
 				My Journey
 			</motion.h2>
 
-			{/* Timeline container */}
-			<div ref={containerRef} className="relative max-w-4xl mx-auto px-4">
-				{/* Animated vertical line */}
-				<div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-stone-200 dark:bg-stone-700 hidden md:block -translate-x-1/2">
-					<motion.div
-						className="w-full bg-gradient-to-b from-blue-500 to-violet-500 origin-top"
-						style={{ height: lineHeight }}
-					/>
+			{/* Card Stack Container */}
+			<div
+				className="relative max-w-2xl mx-auto px-4 cursor-pointer"
+				onClick={handleClick}
+			>
+				{/* Stacked cards in background */}
+				<div className="relative h-[400px] md:h-[350px]">
+					{timelineData.map((item, index) => {
+						const distance = index - activeIndex;
+						const isActive = index === activeIndex;
+						const isBehind = distance > 0 || (distance < 0 && Math.abs(distance) > timelineData.length / 2);
+
+						// Calculate position for stacking effect
+						let zIndex = timelineData.length - Math.abs(distance);
+						let scale = 1 - Math.abs(distance) * 0.05;
+						let yOffset = Math.abs(distance) * 15;
+						let opacity = isActive ? 1 : Math.max(0.3, 1 - Math.abs(distance) * 0.3);
+
+						if (distance < 0 && distance > -timelineData.length / 2) {
+							// Cards that have passed
+							zIndex = 0;
+							opacity = 0;
+							scale = 0.9;
+							yOffset = -50;
+						}
+
+						return (
+							<motion.div
+								key={item.year}
+								className="absolute inset-0"
+								initial={false}
+								animate={{
+									scale: scale,
+									y: yOffset,
+									opacity: opacity,
+									zIndex: zIndex,
+								}}
+								transition={{
+									duration: 0.6,
+									ease: [0.32, 0.72, 0, 1]
+								}}
+							>
+								<div className={`h-full p-6 md:p-8 rounded-3xl border transition-all duration-300 ${
+									isActive
+										? 'bg-white dark:bg-stone-800 border-blue-500/50 shadow-2xl shadow-blue-500/10'
+										: 'bg-stone-50 dark:bg-stone-800/80 border-stone-200 dark:border-stone-700'
+								}`}>
+									{/* Year badge */}
+									<div className="flex items-center justify-between mb-4">
+										<span className={`text-4xl md:text-5xl font-bold transition-colors duration-300 ${
+											isActive ? 'text-blue-500' : 'text-stone-300 dark:text-stone-600'
+										}`}>
+											{item.year}
+										</span>
+										<span className={`text-sm px-4 py-1.5 rounded-full transition-colors duration-300 ${
+											isActive
+												? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+												: 'bg-stone-100 dark:bg-stone-700 text-stone-500'
+										}`}>
+											{item.duration}
+										</span>
+									</div>
+
+									{/* Title */}
+									<h3 className={`text-xl md:text-2xl font-bold mb-4 transition-colors duration-300 ${
+										isActive ? 'text-stone-900 dark:text-white' : 'text-stone-500'
+									}`}>
+										{item.title}
+									</h3>
+
+									{/* Details */}
+									<p className={`text-sm md:text-base leading-relaxed transition-colors duration-300 ${
+										isActive ? 'text-stone-600 dark:text-stone-300' : 'text-stone-400'
+									}`}>
+										{item.details}
+									</p>
+								</div>
+							</motion.div>
+						);
+					})}
 				</div>
 
-				{/* Timeline items */}
-				{timelineData.map((item, index) => (
-					<div key={index} data-timeline-card>
-						<TimelineCard
-							item={item}
-							index={index}
-							isActive={activeIndex === index}
-							totalItems={timelineData.length}
-						/>
-					</div>
+				{/* Pause indicator */}
+				<AnimatePresence>
+					{isPaused && (
+						<motion.div
+							className="absolute top-4 right-8 bg-stone-900/80 dark:bg-white/80 text-white dark:text-stone-900 px-3 py-1 rounded-full text-sm font-medium"
+							initial={{ opacity: 0, y: -10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -10 }}
+						>
+							Paused - Click to resume
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</div>
+
+			{/* Navigation dots */}
+			<div className="flex justify-center gap-2 mt-8">
+				{timelineData.map((_, index) => (
+					<button
+						key={index}
+						onClick={(e) => {
+							e.stopPropagation();
+							goToCard(index);
+						}}
+						className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+							index === activeIndex
+								? 'bg-blue-500 w-8'
+								: 'bg-stone-300 dark:bg-stone-600 hover:bg-stone-400'
+						}`}
+						aria-label={`Go to ${timelineData[index].year}`}
+					/>
 				))}
 			</div>
+
+			{/* Progress bar */}
+			{!isPaused && (
+				<div className="max-w-2xl mx-auto mt-4 px-4">
+					<div className="h-1 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
+						<motion.div
+							className="h-full bg-blue-500"
+							initial={{ width: '0%' }}
+							animate={{ width: '100%' }}
+							transition={{ duration: 2, ease: 'linear' }}
+							key={activeIndex}
+						/>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
