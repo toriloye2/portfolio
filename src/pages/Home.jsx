@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Intro from '../components/Intro';
 import Timeline from '../components/Timeline';
 import Skills from '../components/Skills';
+import Certifications from '../components/Certifications';
 import Contact from '../components/Contact';
 
 function Home() {
@@ -49,6 +50,11 @@ function Home() {
 			{/* Skills Section */}
 			<section className="rounded-2xl bg-white dark:bg-stone-800 p-6 md:p-10 shadow-lg border border-stone-200 dark:border-stone-700 overflow-hidden">
 				<Skills />
+			</section>
+
+			{/* Certifications Section */}
+			<section className="rounded-2xl bg-gradient-to-br from-stone-50 to-white dark:from-stone-800 dark:to-stone-900 p-6 md:p-10 shadow-lg border border-stone-200 dark:border-stone-700">
+				<Certifications />
 			</section>
 
 			{/* Contact Section */}
