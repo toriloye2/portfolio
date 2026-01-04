@@ -14,9 +14,11 @@ const skills = [
   { name: 'CSS', icon: 'devicon-css3-plain colored' },  // Added CSS
   { name: 'Java', icon: 'devicon-java-plain colored' }, // Added Java
   { name: 'PHP', icon: 'devicon-php-plain colored' },   // Added PHP
-  { name: 'Bootstrap', icon: 'devicon-bootstrap-plain colored' }, //
+  { name: 'Bootstrap', icon: 'devicon-bootstrap-plain colored' },
   { name: 'Figma', icon: 'devicon-figma-plain colored' },
-
+  { name: 'C#', icon: 'devicon-csharp-plain colored' },
+  { name: '.NET', icon: 'devicon-dotnetcore-plain colored' },
+  { name: 'Salesforce', icon: 'devicon-salesforce-plain colored' },
 ];
 
 export default skills;
