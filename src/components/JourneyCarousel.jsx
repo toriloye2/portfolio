@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from 'motion/react';
 function JourneyCard({ item, isActive, prefersReducedMotion }) {
 	const [isExpanded, setIsExpanded] = useState(false);
 
-	// Animation variants
 	const cardVariants = {
 		active: {
 			opacity: 1,
@@ -103,9 +102,10 @@ function JourneyCard({ item, isActive, prefersReducedMotion }) {
 
 function JourneyCarousel({ items }) {
 	const [activeIndex, setActiveIndex] = useState(0);
-	const containerRef = useRef(null);
-	const mobileScrollRef = useRef(null);
+	const [isPaused, setIsPaused] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
+	const carouselRef = useRef(null);
+	const mobileScrollRef = useRef(null);
 	const prefersReducedMotion = useReducedMotion();
 
 	// Check if mobile
@@ -116,72 +116,30 @@ function JourneyCarousel({ items }) {
 		return () => window.removeEventListener('resize', checkMobile);
 	}, []);
 
-	// Desktop: Scroll-driven active card (using IntersectionObserver on scroll position)
+	// Auto-advance timer
 	useEffect(() => {
-		if (isMobile || !containerRef.current) return;
+		if (isPaused || prefersReducedMotion) return;
 
-		const handleScroll = () => {
-			const container = containerRef.current;
-			if (!container) return;
+		const interval = isMobile ? 4500 : 3500; // 4.5s mobile, 3.5s desktop
+		const timer = setInterval(() => {
+			setActiveIndex((prev) => (prev + 1) % items.length);
+		}, interval);
 
-			const rect = container.getBoundingClientRect();
-			const containerHeight = container.offsetHeight;
-			const viewportHeight = window.innerHeight;
-
-			// Calculate how far through the sticky section we've scrolled
-			const scrollProgress = Math.max(0, Math.min(1,
-				(viewportHeight - rect.top) / (containerHeight + viewportHeight)
-			));
-
-			// Map scroll progress to card index
-			const newIndex = Math.min(
-				items.length - 1,
-				Math.floor(scrollProgress * items.length)
-			);
-
-			if (newIndex !== activeIndex && newIndex >= 0) {
-				setActiveIndex(newIndex);
-			}
-		};
-
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		handleScroll();
-
-		return () => window.removeEventListener('scroll', handleScroll);
-	}, [isMobile, items.length, activeIndex]);
-
-	// Mobile: Scroll snap observer
-	useEffect(() => {
-		if (!isMobile || !mobileScrollRef.current) return;
-
-		const scrollContainer = mobileScrollRef.current;
-
-		const handleScroll = () => {
-			const scrollLeft = scrollContainer.scrollLeft;
-			const cardWidth = scrollContainer.offsetWidth * 0.85; // 85% width cards
-			const gap = 16;
-			const newIndex = Math.round(scrollLeft / (cardWidth + gap));
-			if (newIndex !== activeIndex && newIndex >= 0 && newIndex < items.length) {
-				setActiveIndex(newIndex);
-			}
-		};
-
-		scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
-		return () => scrollContainer.removeEventListener('scroll', handleScroll);
-	}, [isMobile, activeIndex, items.length]);
+		return () => clearInterval(timer);
+	}, [isPaused, isMobile, items.length, prefersReducedMotion]);
 
 	// Keyboard navigation
 	const handleKeyDown = useCallback((e) => {
 		if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
 			e.preventDefault();
-			setActiveIndex((prev) => Math.max(0, prev - 1));
+			setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
 		} else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 			e.preventDefault();
-			setActiveIndex((prev) => Math.min(items.length - 1, prev + 1));
+			setActiveIndex((prev) => (prev + 1) % items.length);
 		}
 	}, [items.length]);
 
-	// Scroll to card on mobile when activeIndex changes via dots/keyboard
+	// Scroll to card on mobile when activeIndex changes
 	useEffect(() => {
 		if (!isMobile || !mobileScrollRef.current) return;
 		const scrollContainer = mobileScrollRef.current;
@@ -198,48 +156,56 @@ function JourneyCarousel({ items }) {
 		setActiveIndex(index);
 	};
 
-	return (
-		<div className="py-12">
-			{/* Header */}
-			<motion.span
-				className="block text-sm font-medium tracking-widest text-blue-600 dark:text-orange-400 mb-4 uppercase text-center"
-				initial={{ opacity: 0 }}
-				whileInView={{ opacity: 1 }}
-				viewport={{ once: true }}
-				transition={{ duration: 0.3 }}
-			>
-				Experience & Education
-			</motion.span>
-			<motion.h2
-				className="text-3xl md:text-4xl font-bold mb-8 text-center text-stone-900 dark:text-white"
-				initial={{ opacity: 0, y: -20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
-				transition={{ duration: 0.5 }}
-			>
-				My Journey
-			</motion.h2>
+	// Pause/resume handlers
+	const handlePause = () => setIsPaused(true);
+	const handleResume = () => setIsPaused(false);
 
-			{/* Desktop: Sticky scroll-driven carousel */}
-			<div
-				ref={containerRef}
-				className="hidden md:block"
-				style={{ height: `${items.length * 60}vh` }} // Scroll height based on items
-			>
-				<div className="sticky top-24 h-[70vh] flex items-center">
+	return (
+		<section className="py-16 px-4 sm:px-6 lg:px-8">
+			<div className="max-w-6xl mx-auto">
+				{/* Header */}
+				<motion.span
+					className="block text-sm font-medium tracking-widest text-blue-600 dark:text-orange-400 mb-4 uppercase text-center"
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.3 }}
+				>
+					Experience & Education
+				</motion.span>
+				<motion.h2
+					className="text-3xl md:text-4xl font-bold mb-12 text-center text-stone-900 dark:text-white"
+					initial={{ opacity: 0, y: -20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5 }}
+				>
+					My Journey
+				</motion.h2>
+
+				{/* Desktop Carousel */}
+				<div
+					ref={carouselRef}
+					className="hidden md:block"
+					onMouseEnter={handlePause}
+					onMouseLeave={handleResume}
+					onFocus={handlePause}
+					onBlur={handleResume}
+				>
 					<div
-						className="relative w-full max-w-2xl mx-auto px-4"
+						className="relative w-full max-w-4xl mx-auto"
 						role="region"
 						aria-label="Journey timeline"
+						aria-live="polite"
 						tabIndex={0}
 						onKeyDown={handleKeyDown}
 					>
 						{/* Cards stack */}
-						<div className="relative h-[400px]">
+						<div className="relative min-h-[320px]">
 							{items.map((item, index) => {
 								const isActive = index === activeIndex;
-								const isNext = index === activeIndex + 1;
-								const isPrev = index === activeIndex - 1;
+								const isNext = index === (activeIndex + 1) % items.length;
+								const isPrev = index === (activeIndex - 1 + items.length) % items.length;
 								const isVisible = isActive || isNext || isPrev;
 
 								if (!isVisible) return null;
@@ -251,10 +217,10 @@ function JourneyCarousel({ items }) {
 									xOffset = 0;
 									zIndex = 10;
 								} else if (isNext) {
-									xOffset = 60;
+									xOffset = 40;
 									zIndex = 5;
 								} else if (isPrev) {
-									xOffset = -60;
+									xOffset = -40;
 									zIndex = 5;
 								}
 
@@ -284,7 +250,7 @@ function JourneyCarousel({ items }) {
 
 						{/* Pagination dots */}
 						<div
-							className="flex justify-center gap-2 mt-6"
+							className="flex justify-center gap-2 mt-8"
 							role="tablist"
 							aria-label="Journey navigation"
 						>
@@ -292,6 +258,8 @@ function JourneyCarousel({ items }) {
 								<button
 									key={index}
 									onClick={() => goToCard(index)}
+									onFocus={handlePause}
+									onBlur={handleResume}
 									role="tab"
 									aria-selected={index === activeIndex}
 									aria-label={`Go to ${item.year}: ${item.title}`}
@@ -306,64 +274,70 @@ function JourneyCarousel({ items }) {
 
 						{/* Keyboard hint */}
 						<p className="text-center text-xs text-stone-400 mt-4">
-							Use arrow keys or scroll to navigate
+							Use arrow keys to navigate
 						</p>
 					</div>
 				</div>
-			</div>
 
-			{/* Mobile: Horizontal scroll-snap carousel */}
-			<div className="md:hidden">
+				{/* Mobile: Horizontal scroll-snap carousel */}
 				<div
-					ref={mobileScrollRef}
-					className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 scrollbar-hide"
-					style={{
-						scrollbarWidth: 'none',
-						msOverflowStyle: 'none',
-						WebkitOverflowScrolling: 'touch',
-					}}
-					role="region"
-					aria-label="Journey timeline"
-					tabIndex={0}
-					onKeyDown={handleKeyDown}
+					className="md:hidden"
+					onTouchStart={handlePause}
+					onTouchEnd={handleResume}
 				>
-					{items.map((item, index) => (
-						<div
-							key={item.year}
-							className="flex-shrink-0 w-[85vw] snap-center"
-						>
-							<JourneyCard
-								item={item}
-								isActive={index === activeIndex}
-								prefersReducedMotion={prefersReducedMotion}
+					<div
+						ref={mobileScrollRef}
+						className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 scrollbar-hide"
+						style={{
+							scrollbarWidth: 'none',
+							msOverflowStyle: 'none',
+							WebkitOverflowScrolling: 'touch',
+						}}
+						role="region"
+						aria-label="Journey timeline"
+						tabIndex={0}
+						onKeyDown={handleKeyDown}
+						onFocus={handlePause}
+						onBlur={handleResume}
+					>
+						{items.map((item, index) => (
+							<div
+								key={item.year}
+								className="flex-shrink-0 w-[85vw] snap-center"
+							>
+								<JourneyCard
+									item={item}
+									isActive={index === activeIndex}
+									prefersReducedMotion={prefersReducedMotion}
+								/>
+							</div>
+						))}
+					</div>
+
+					{/* Mobile pagination dots */}
+					<div
+						className="flex justify-center gap-2 mt-4"
+						role="tablist"
+						aria-label="Journey navigation"
+					>
+						{items.map((item, index) => (
+							<button
+								key={index}
+								onClick={() => goToCard(index)}
+								role="tab"
+								aria-selected={index === activeIndex}
+								aria-label={`Go to ${item.year}: ${item.title}`}
+								className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-orange-500 ${
+									index === activeIndex
+										? 'bg-blue-500 dark:bg-orange-500 w-6'
+										: 'bg-stone-300 dark:bg-stone-600 w-2'
+								}`}
 							/>
-						</div>
-					))}
-				</div>
-
-				{/* Mobile pagination dots */}
-				<div
-					className="flex justify-center gap-2 mt-4"
-					role="tablist"
-					aria-label="Journey navigation"
-				>
-					{items.map((item, index) => (
-						<button
-							key={index}
-							onClick={() => goToCard(index)}
-							role="tab"
-							aria-selected={index === activeIndex}
-							aria-label={`Go to ${item.year}: ${item.title}`}
-							className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-orange-500 ${
-								index === activeIndex
-									? 'bg-blue-500 dark:bg-orange-500 w-6'
-									: 'bg-stone-300 dark:bg-stone-600 w-2'
-							}`}
-						/>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 }
 

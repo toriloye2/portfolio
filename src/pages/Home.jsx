@@ -19,9 +19,7 @@ function Home() {
 			<FeaturedProjects />
 
 			{/* Journey/Experience Section */}
-			<div className="max-w-6xl mx-auto px-6">
-				<Timeline />
-			</div>
+			<Timeline />
 
 			{/* Skills/Tools Section */}
 			<Skills />
