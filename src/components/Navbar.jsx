@@ -1,49 +1,93 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
 	const location = useLocation();
 
 	const isActive = (path) => location.pathname === path;
 
+	// Handle scroll
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrolled(window.scrollY > 50);
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	// Close mobile menu on route change
+	useEffect(() => {
+		setIsOpen(false);
+	}, [location]);
+
 	return (
-		<nav className="bg-white/80 dark:bg-stone-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200 dark:border-stone-700">
-			<div className="max-w-5xl mx-auto px-4">
-				<div className="flex justify-between items-center h-16">
+		<nav
+			className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+				scrolled
+					? 'bg-white/90 dark:bg-stone-950/90 backdrop-blur-lg shadow-sm border-b border-stone-200/50 dark:border-stone-800/50'
+					: 'bg-transparent'
+			}`}
+		>
+			<div className="max-w-6xl mx-auto px-6">
+				<div className="flex justify-between items-center h-16 md:h-20">
 					{/* Logo/Name */}
-					<Link to="/" className="text-xl font-bold text-violet-600 dark:text-orange-400">
-						Toyyib
+					<Link
+						to="/"
+						className="text-xl font-bold text-stone-900 dark:text-white hover:text-blue-600 dark:hover:text-orange-400 transition-colors"
+					>
+						<span className="hidden sm:inline">ORILOYE</span>
+						<span className="sm:hidden">T.</span>
 					</Link>
 
 					{/* Desktop Navigation */}
-					<div className="hidden md:flex items-center space-x-8">
+					<div className="hidden md:flex items-center gap-8">
 						<Link
 							to="/"
-							className={`transition-colors duration-200 ${
+							className={`relative py-2 text-sm font-medium tracking-wide transition-colors duration-200 ${
 								isActive('/')
-									? 'text-violet-600 dark:text-orange-400 font-semibold'
-									: 'text-stone-600 dark:text-stone-300 hover:text-violet-600 dark:hover:text-orange-400'
+									? 'text-blue-600 dark:text-orange-400'
+									: 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
 							}`}
 						>
-							Home
+							HOME
+							{isActive('/') && (
+								<motion.div
+									layoutId="navbar-indicator"
+									className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600 dark:bg-orange-400"
+								/>
+							)}
 						</Link>
 						<Link
 							to="/projects"
-							className={`transition-colors duration-200 ${
+							className={`relative py-2 text-sm font-medium tracking-wide transition-colors duration-200 ${
 								isActive('/projects')
-									? 'text-violet-600 dark:text-orange-400 font-semibold'
-									: 'text-stone-600 dark:text-stone-300 hover:text-violet-600 dark:hover:text-orange-400'
+									? 'text-blue-600 dark:text-orange-400'
+									: 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
 							}`}
 						>
-							Projects
+							PROJECTS
+							{isActive('/projects') && (
+								<motion.div
+									layoutId="navbar-indicator"
+									className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600 dark:bg-orange-400"
+								/>
+							)}
 						</Link>
+						<a
+							href="#contact"
+							className="text-sm font-medium tracking-wide text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white transition-colors duration-200"
+						>
+							CONTACT
+						</a>
 					</div>
 
 					{/* Mobile Menu Button */}
 					<button
 						onClick={() => setIsOpen(!isOpen)}
-						className="md:hidden p-2 rounded-md text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800"
+						className="md:hidden p-2 rounded-lg text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
 						aria-label="Toggle menu"
 					>
 						<svg
@@ -70,35 +114,50 @@ function Navbar() {
 						</svg>
 					</button>
 				</div>
-
-				{/* Mobile Navigation */}
-				{isOpen && (
-					<div className="md:hidden pb-4 space-y-2">
-						<Link
-							to="/"
-							onClick={() => setIsOpen(false)}
-							className={`block px-4 py-2 rounded-md transition-colors duration-200 ${
-								isActive('/')
-									? 'bg-violet-100 dark:bg-orange-900/30 text-violet-600 dark:text-orange-400 font-semibold'
-									: 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-							}`}
-						>
-							Home
-						</Link>
-						<Link
-							to="/projects"
-							onClick={() => setIsOpen(false)}
-							className={`block px-4 py-2 rounded-md transition-colors duration-200 ${
-								isActive('/projects')
-									? 'bg-violet-100 dark:bg-orange-900/30 text-violet-600 dark:text-orange-400 font-semibold'
-									: 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-							}`}
-						>
-							Projects
-						</Link>
-					</div>
-				)}
 			</div>
+
+			{/* Mobile Navigation */}
+			<AnimatePresence>
+				{isOpen && (
+					<motion.div
+						initial={{ opacity: 0, height: 0 }}
+						animate={{ opacity: 1, height: 'auto' }}
+						exit={{ opacity: 0, height: 0 }}
+						transition={{ duration: 0.2 }}
+						className="md:hidden bg-white dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 overflow-hidden"
+					>
+						<div className="px-6 py-4 space-y-1">
+							<Link
+								to="/"
+								className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+									isActive('/')
+										? 'bg-blue-50 dark:bg-orange-500/10 text-blue-600 dark:text-orange-400'
+										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800'
+								}`}
+							>
+								Home
+							</Link>
+							<Link
+								to="/projects"
+								className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+									isActive('/projects')
+										? 'bg-blue-50 dark:bg-orange-500/10 text-blue-600 dark:text-orange-400'
+										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800'
+								}`}
+							>
+								Projects
+							</Link>
+							<a
+								href="#contact"
+								onClick={() => setIsOpen(false)}
+								className="block px-4 py-3 rounded-lg font-medium text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors duration-200"
+							>
+								Contact
+							</a>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</nav>
 	);
 }
