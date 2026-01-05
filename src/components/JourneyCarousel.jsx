@@ -98,13 +98,13 @@ function JourneyCarousel({ items }) {
 	useEffect(() => {
 		if (isPaused || prefersReducedMotion) return;
 
-		const interval = isMobile ? 4500 : 3500; // 4.5s mobile, 3.5s desktop
+		const interval = 2500; // 2.5s auto-advance
 		const timer = setInterval(() => {
 			setActiveIndex((prev) => (prev + 1) % items.length);
 		}, interval);
 
 		return () => clearInterval(timer);
-	}, [isPaused, isMobile, items.length, prefersReducedMotion]);
+	}, [isPaused, items.length, prefersReducedMotion]);
 
 	// Keyboard navigation
 	const handleKeyDown = useCallback((e) => {
