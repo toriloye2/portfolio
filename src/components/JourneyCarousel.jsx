@@ -2,8 +2,6 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
 function JourneyCard({ item, isActive, prefersReducedMotion }) {
-	const [isExpanded, setIsExpanded] = useState(false);
-
 	const cardVariants = {
 		active: {
 			opacity: 1,
@@ -18,9 +16,6 @@ function JourneyCard({ item, isActive, prefersReducedMotion }) {
 			filter: prefersReducedMotion ? 'blur(0px)' : 'blur(3px)',
 		},
 	};
-
-	const visibleBullets = isExpanded ? item.description : item.description.slice(0, 3);
-	const hasMore = item.description.length > 3;
 
 	return (
 		<motion.div
@@ -65,11 +60,11 @@ function JourneyCard({ item, isActive, prefersReducedMotion }) {
 					{item.company}
 				</p>
 
-				{/* Description bullets */}
+				{/* Description bullets - show all */}
 				<ul className={`space-y-2 text-sm transition-colors duration-300 ${
 					isActive ? 'text-stone-600 dark:text-stone-300' : 'text-stone-400 dark:text-stone-500'
 				}`}>
-					{visibleBullets.map((bullet, idx) => (
+					{item.description.map((bullet, idx) => (
 						<li key={idx} className="flex items-start gap-2">
 							<span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
 								isActive ? 'bg-blue-500 dark:bg-orange-400' : 'bg-stone-300 dark:bg-stone-600'
@@ -78,23 +73,6 @@ function JourneyCard({ item, isActive, prefersReducedMotion }) {
 						</li>
 					))}
 				</ul>
-
-				{/* Read more button */}
-				{hasMore && (
-					<button
-						onClick={(e) => {
-							e.stopPropagation();
-							setIsExpanded(!isExpanded);
-						}}
-						className={`mt-3 text-sm font-medium transition-colors ${
-							isActive
-								? 'text-blue-500 hover:text-blue-600 dark:text-orange-400 dark:hover:text-orange-300'
-								: 'text-stone-400 hover:text-stone-500'
-						}`}
-					>
-						{isExpanded ? 'Show less' : `+${item.description.length - 3} more`}
-					</button>
-				)}
 			</div>
 		</motion.div>
 	);
@@ -201,7 +179,7 @@ function JourneyCarousel({ items }) {
 						onKeyDown={handleKeyDown}
 					>
 						{/* Cards stack */}
-						<div className="relative min-h-[320px]">
+						<div className="relative min-h-[420px]">
 							{items.map((item, index) => {
 								const isActive = index === activeIndex;
 								const isNext = index === (activeIndex + 1) % items.length;
