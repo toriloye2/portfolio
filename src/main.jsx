@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
+import Contact from './pages/Contact'
 import './styles/tailwind.css'
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: 'projects',
         element: <Projects />,
+      },
+      {
+        path: 'contact',
+        element: <Contact />,
       },
     ],
   },
