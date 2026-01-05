@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence, LayoutGroup } from 'motion/react';
+import { motion, AnimatePresence, LayoutGroup, useReducedMotion } from 'motion/react';
 import portfolio from '../data/portfolio';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
@@ -9,21 +9,25 @@ const filters = ['All', 'Full Stack', 'Frontend'];
 function Projects() {
 	const [activeFilter, setActiveFilter] = useState('All');
 	const [selectedProject, setSelectedProject] = useState(null);
+	const prefersReducedMotion = useReducedMotion();
 
 	const filteredProjects = activeFilter === 'All'
 		? portfolio
 		: portfolio.filter(project => project.category === activeFilter);
 
 	return (
-		<div className="min-h-screen py-16 px-4">
-			<div className="max-w-4xl mx-auto">
+		<div className="min-h-screen pt-24 pb-16 px-6">
+			<div className="max-w-6xl mx-auto">
 				{/* Header */}
 				<motion.div
-					className="text-center mb-12"
+					className="text-center mb-16"
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 				>
+					<span className="inline-block text-sm font-medium tracking-widest text-blue-600 dark:text-orange-400 mb-4 uppercase">
+						Portfolio
+					</span>
 					<h1 className="text-5xl md:text-7xl font-bold text-stone-900 dark:text-white mb-6">
 						My Projects
 					</h1>
@@ -45,11 +49,11 @@ function Projects() {
 							onClick={() => setActiveFilter(filter)}
 							className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
 								activeFilter === filter
-									? 'bg-blue-500 dark:bg-orange-500 text-white shadow-lg shadow-blue-500/25 dark:shadow-orange-500/25'
-									: 'bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-300 dark:hover:bg-stone-700 hover:text-stone-900 dark:hover:text-white'
+									? 'bg-blue-600 dark:bg-orange-500 text-white shadow-lg shadow-blue-500/25 dark:shadow-orange-500/25'
+									: 'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 border border-stone-200 dark:border-stone-700'
 							}`}
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
+							whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+							whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
 						>
 							{filter}
 						</motion.button>
@@ -60,7 +64,7 @@ function Projects() {
 				<LayoutGroup>
 					<motion.div
 						layout
-						className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+						className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
 					>
 						<AnimatePresence mode="popLayout">
 							{filteredProjects.map((project) => (

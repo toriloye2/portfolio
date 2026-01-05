@@ -33,7 +33,7 @@ function App() {
 			viewBox="0 0 24 24"
 			strokeWidth={1.5}
 			stroke="currentColor"
-			className="w-6 h-6"
+			className="w-5 h-5"
 		>
 			<path
 				strokeLinecap="round"
@@ -49,8 +49,8 @@ function App() {
 			fill="none"
 			viewBox="0 0 24 24"
 			strokeWidth={1.5}
-			stroke="white"
-			className="w-6 h-6"
+			stroke="currentColor"
+			className="w-5 h-5"
 		>
 			<path
 				strokeLinecap="round"
@@ -61,7 +61,7 @@ function App() {
 	);
 
 	return (
-		<div className="bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-300 min-h-screen font-inter">
+		<div className="bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-300 min-h-screen font-inter transition-colors duration-300">
 			<Navbar />
 
 			{/* Theme Toggle Button */}
@@ -69,7 +69,7 @@ function App() {
 				type="button"
 				onClick={handleThemeSwitch}
 				aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-				className="fixed p-2 z-40 right-6 top-20 bg-violet-300 dark:bg-orange-300 rounded-md shadow-lg hover:scale-110 transition-transform duration-200"
+				className="fixed p-3 z-40 right-6 top-20 bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 rounded-full shadow-lg hover:shadow-xl border border-stone-200 dark:border-stone-700 hover:scale-110 transition-all duration-200"
 			>
 				{theme === 'dark' ? sun : moon}
 			</button>
@@ -80,9 +80,7 @@ function App() {
 			</main>
 
 			{/* Footer */}
-			<div className="max-w-5xl w-11/12 mx-auto">
-				<Footer />
-			</div>
+			<Footer />
 		</div>
 	);
 }

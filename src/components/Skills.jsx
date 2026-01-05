@@ -5,51 +5,60 @@ const Skills = () => {
 	const prefersReducedMotion = useReducedMotion();
 
 	return (
-		<div className="py-4">
-			<motion.h2
-				className="text-2xl md:text-3xl font-bold mb-6 text-center text-stone-900 dark:text-white"
-				initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
-				transition={{ duration: 0.3 }}
-			>
-				Tools & Technologies
-			</motion.h2>
+		<section className="py-24 px-6">
+			<div className="max-w-6xl mx-auto">
+				{/* Header */}
+				<motion.div
+					className="text-center mb-12"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5 }}
+				>
+					<span className="inline-block text-sm font-medium tracking-widest text-blue-600 dark:text-orange-400 mb-4 uppercase">
+						Tech Stack
+					</span>
+					<h2 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white">
+						Tools & Technologies
+					</h2>
+				</motion.div>
 
-			<motion.div
-				className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3"
-				initial={prefersReducedMotion ? {} : { opacity: 0 }}
-				whileInView={{ opacity: 1 }}
-				viewport={{ once: true }}
-				transition={{ duration: 0.3, delay: 0.1 }}
-			>
-				{skills.map((skill, index) => (
-					<motion.div
-						key={index}
-						initial={prefersReducedMotion ? {} : { opacity: 0, y: 8 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{
-							duration: 0.2,
-							delay: prefersReducedMotion ? 0 : index * 0.03,
-							ease: 'easeOut',
-						}}
-						whileHover={prefersReducedMotion ? {} : {
-							y: -2,
-							transition: { duration: 0.15, ease: 'easeOut' }
-						}}
-						className="group"
-					>
-						<div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-stone-800 shadow-sm hover:shadow-md border border-stone-200 dark:border-stone-700 transition-shadow duration-150 ease-out">
-							<i className={`${skill.icon} text-2xl transition-transform duration-150 ease-out group-hover:scale-105`} />
-							<span className="text-sm font-medium text-stone-700 dark:text-stone-300 truncate">
-								{skill.name}
-							</span>
-						</div>
-					</motion.div>
-				))}
-			</motion.div>
-		</div>
+				{/* Skills Grid */}
+				<motion.div
+					className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4"
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.3, delay: 0.1 }}
+				>
+					{skills.map((skill, index) => (
+						<motion.div
+							key={index}
+							initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
+							whileInView={{ opacity: 1, scale: 1 }}
+							viewport={{ once: true }}
+							transition={{
+								duration: 0.2,
+								delay: prefersReducedMotion ? 0 : index * 0.02,
+								ease: 'easeOut',
+							}}
+							whileHover={prefersReducedMotion ? {} : {
+								y: -4,
+								transition: { duration: 0.15, ease: 'easeOut' }
+							}}
+							className="group"
+						>
+							<div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-blue-300 dark:hover:border-orange-500/50 transition-all duration-200">
+								<i className={`${skill.icon} text-3xl transition-transform duration-150 ease-out group-hover:scale-110`} />
+								<span className="text-xs font-medium text-stone-600 dark:text-stone-400 text-center">
+									{skill.name}
+								</span>
+							</div>
+						</motion.div>
+					))}
+				</motion.div>
+			</div>
+		</section>
 	);
 };
 

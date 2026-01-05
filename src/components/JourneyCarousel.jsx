@@ -13,10 +13,10 @@ function JourneyCard({ item, isActive, prefersReducedMotion }) {
 			filter: 'blur(0px)',
 		},
 		inactive: {
-			opacity: prefersReducedMotion ? 0.5 : 0.25,
-			scale: prefersReducedMotion ? 1 : 0.96,
+			opacity: prefersReducedMotion ? 0.5 : 0.3,
+			scale: prefersReducedMotion ? 1 : 0.95,
 			y: prefersReducedMotion ? 0 : 10,
-			filter: prefersReducedMotion ? 'blur(0px)' : 'blur(2px)',
+			filter: prefersReducedMotion ? 'blur(0px)' : 'blur(3px)',
 		},
 	};
 
@@ -201,6 +201,15 @@ function JourneyCarousel({ items }) {
 	return (
 		<div className="py-12">
 			{/* Header */}
+			<motion.span
+				className="block text-sm font-medium tracking-widest text-blue-600 dark:text-orange-400 mb-4 uppercase text-center"
+				initial={{ opacity: 0 }}
+				whileInView={{ opacity: 1 }}
+				viewport={{ once: true }}
+				transition={{ duration: 0.3 }}
+			>
+				Experience & Education
+			</motion.span>
 			<motion.h2
 				className="text-3xl md:text-4xl font-bold mb-8 text-center text-stone-900 dark:text-white"
 				initial={{ opacity: 0, y: -20 }}
