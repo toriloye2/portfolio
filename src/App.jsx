@@ -61,7 +61,7 @@ function App() {
 	);
 
 	return (
-		<div className="bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-300 min-h-screen font-inter transition-colors duration-300">
+		<div className="bg-white dark:bg-black text-stone-900 dark:text-stone-300 min-h-screen font-inter transition-colors duration-300">
 			<Navbar />
 
 			{/* Theme Toggle Button */}

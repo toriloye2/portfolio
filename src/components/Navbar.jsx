@@ -27,7 +27,7 @@ function Navbar() {
 		<nav
 			className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
 				scrolled
-					? 'bg-white/90 dark:bg-stone-950/90 backdrop-blur-lg shadow-sm border-b border-stone-200/50 dark:border-stone-800/50'
+					? 'bg-white/90 dark:bg-black/90 backdrop-blur-lg shadow-sm border-b border-stone-200/50 dark:border-stone-800/50'
 					: 'bg-transparent'
 			}`}
 		>
@@ -76,12 +76,22 @@ function Navbar() {
 								/>
 							)}
 						</Link>
-						<a
-							href="#contact"
-							className="text-sm font-medium tracking-wide text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white transition-colors duration-200"
+						<Link
+							to="/contact"
+							className={`relative py-2 text-sm font-medium tracking-wide transition-colors duration-200 ${
+								isActive('/contact')
+									? 'text-blue-600 dark:text-orange-400'
+									: 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
+							}`}
 						>
 							CONTACT
-						</a>
+							{isActive('/contact') && (
+								<motion.div
+									layoutId="navbar-indicator"
+									className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600 dark:bg-orange-400"
+								/>
+							)}
+						</Link>
 					</div>
 
 					{/* Mobile Menu Button */}
@@ -124,7 +134,7 @@ function Navbar() {
 						animate={{ opacity: 1, height: 'auto' }}
 						exit={{ opacity: 0, height: 0 }}
 						transition={{ duration: 0.2 }}
-						className="md:hidden bg-white dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 overflow-hidden"
+						className="md:hidden bg-white dark:bg-black border-b border-stone-200 dark:border-stone-800 overflow-hidden"
 					>
 						<div className="px-6 py-4 space-y-1">
 							<Link
@@ -132,7 +142,7 @@ function Navbar() {
 								className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
 									isActive('/')
 										? 'bg-blue-50 dark:bg-orange-500/10 text-blue-600 dark:text-orange-400'
-										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800'
+										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900'
 								}`}
 							>
 								Home
@@ -142,18 +152,21 @@ function Navbar() {
 								className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
 									isActive('/projects')
 										? 'bg-blue-50 dark:bg-orange-500/10 text-blue-600 dark:text-orange-400'
-										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800'
+										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900'
 								}`}
 							>
 								Projects
 							</Link>
-							<a
-								href="#contact"
-								onClick={() => setIsOpen(false)}
-								className="block px-4 py-3 rounded-lg font-medium text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors duration-200"
+							<Link
+								to="/contact"
+								className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+									isActive('/contact')
+										? 'bg-blue-50 dark:bg-orange-500/10 text-blue-600 dark:text-orange-400'
+										: 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900'
+								}`}
 							>
 								Contact
-							</a>
+							</Link>
 						</div>
 					</motion.div>
 				)}
