@@ -250,6 +250,22 @@ function JourneyCarousel({ items }) {
 							))}
 						</div>
 
+						{/* Progress bar */}
+						<div className="mt-6 max-w-xs mx-auto">
+							<div className="h-1 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
+								<motion.div
+									key={activeIndex}
+									className="h-full bg-blue-500 dark:bg-orange-500 rounded-full"
+									initial={{ width: '0%' }}
+									animate={{ width: isPaused ? undefined : '100%' }}
+									transition={{
+										duration: 2.5,
+										ease: 'linear',
+									}}
+								/>
+							</div>
+						</div>
+
 						{/* Keyboard hint */}
 						<p className="text-center text-xs text-stone-400 mt-4">
 							Use arrow keys to navigate
@@ -312,6 +328,22 @@ function JourneyCarousel({ items }) {
 								}`}
 							/>
 						))}
+					</div>
+
+					{/* Mobile Progress bar */}
+					<div className="mt-4 max-w-[200px] mx-auto">
+						<div className="h-1 bg-stone-200 dark:bg-stone-700 rounded-full overflow-hidden">
+							<motion.div
+								key={activeIndex}
+								className="h-full bg-blue-500 dark:bg-orange-500 rounded-full"
+								initial={{ width: '0%' }}
+								animate={{ width: isPaused ? undefined : '100%' }}
+								transition={{
+									duration: 2.5,
+									ease: 'linear',
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
