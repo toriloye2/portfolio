@@ -1,0 +1,77 @@
+function Intro() {
+   return (
+      <div className="relative pt-16 md:pt-8">
+         {/* Resume Button */}
+         <a
+            href="/assets/ORILOYE_TOYYIB_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-4 right-4 md:top-5 md:right-5 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold border-2 border-blue-600 hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-md hover:shadow-lg"
+         >
+            MY RESUME
+         </a>
+
+         {/* Main Content */}
+         <div className="flex flex-col md:flex-row items-center justify-between p-6 md:p-12">
+            {/* Left Section: Text */}
+            <div className="flex flex-col items-start text-left md:w-1/2">
+                        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="block md:inline">ORILOYE&nbsp;</span>
+            <span className="block md:inline">TOYYIB</span>
+            </h1>
+
+
+
+               <p className="text-lg md:text-3xl mb-6 font-bold">
+                  Full-Stack Web Developer
+               </p>
+               <p className="text-lg md:text-xl mb-6">
+                  I'm a full-stack developer passionate about building efficient and scalable web applications.
+                  My journey in coding involves hands-on experience in both frontend and backend development.
+                  From planning and designing to deploying and maintaining, I enjoy solving real-world problems with code.
+                  <br />
+                  I strive to continually improve my skills and share my knowledge with the developer community.
+                  Let's build something amazing together!
+               </p>
+
+               <div className="flex items-center">
+                  <a
+                     href="mailto:taiyeolabamiji@gmail.com"
+                     className="bg-blue-600 dark:bg-gray-800 dark:text-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black dark:hover:bg-white dark:hover:text-black border-2 border-blue-600 dark:border-gray-800 transition-colors duration-300 mr-4"
+                  >
+                     CONTACT ME
+                  </a>
+
+                  <a
+                     href="https://www.linkedin.com/in/toriloye2"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="text-2xl text-gray-700 hover:text-blue-600 dark:hover:text-white mr-4"
+                  >
+                     <i className="fab fa-linkedin"></i> {/* LinkedIn Icon */}
+                  </a>
+                  <a
+                     href="https://github.com/toriloye2"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="text-2xl text-gray-700 hover:text-blue-600 dark:hover:text-white"
+                  >
+                     <i className="fab fa-github"></i> {/* GitHub Icon */}
+                  </a>
+               </div>
+            </div>
+
+            {/* Right Section: Image */}
+            <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center">
+               <img
+                  src="/assets/toyyib.jpg"  // Correct this path if needed
+                  alt="Oriloye Toyyib"
+                  className="w-72 h-72 object-cover rounded-lg shadow-lg"
+               />
+            </div>
+         </div>
+      </div>
+   );
+}
+
+export default Intro;
