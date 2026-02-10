@@ -27,6 +27,15 @@ const certifications = [
     verifyUrl: 'https://sforce.co/verifycerts',
     icon: 'devicon-salesforce-plain colored',
   },
+  {
+    id: 4,
+    name: 'Agentforce Specialist',
+    issuer: 'Salesforce',
+    issueDate: 'February 2026',
+    credentialId: '',
+    verifyUrl: 'https://sforce.co/verifycerts',
+    icon: 'devicon-salesforce-plain colored',
+  },
 ];
 
 export default certifications;
