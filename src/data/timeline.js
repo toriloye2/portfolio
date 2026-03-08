@@ -27,12 +27,12 @@ export default [
 	},
 	{
 		year: '2023',
-		title: 'Diploma in Full Stack Web Development',
+		title: 'Diploma in Software Development',
 		company: 'Red River College',
 		dateRange: '2023 – 2024',
 		description: [
 			'Completed a 2-year diploma focusing on full-stack development.',
-			'Learned Java, PHP, Flask, PostgreSQL, and version control.',
+			'Learned Java, PHP, Flask,Docker,PostgreSQL, and version control.',
 			'Built multiple projects applying front-end and back-end skills.',
 			'Collaborated on team projects using Agile methodologies.',
 		],
