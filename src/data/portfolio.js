@@ -52,5 +52,14 @@ export default [
     stack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
     category: 'Frontend',
     link: 'https://wpgparksearch.netlify.app/',
+  },
+  {
+    id: 7,
+    title: 'AI Knowledge Assistant',
+    imgUrl: './assets/knowledge.png',
+    info: 'Demonstrates how modern AI systems can interact with private knowledge bases. Users can upload documents, which are processed into embeddings and stored in a vector database. When a user asks a question, the system performs semantic search to retrieve the most relevant document chunks before generating an AI response.',
+    stack: ['React', 'Tailwind CSS', 'ASP.NET Core', 'PostgreSQL', 'pgvector', 'Docker', 'OpenAI'],
+    category: 'Full Stack',
+    link: '',
   }
 ];
