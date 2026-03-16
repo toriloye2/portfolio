@@ -3,7 +3,7 @@ function Intro() {
       <div className="relative pt-16 md:pt-8">
          {/* Resume Button */}
          <a
-            href="/assets/ORILOYE_TOYYIB_Resume.pdf"
+            href="/assets/2026resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="absolute top-4 right-4 md:top-5 md:right-5 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold border-2 border-blue-600 hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-md hover:shadow-lg"

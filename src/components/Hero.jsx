@@ -96,7 +96,7 @@ function Hero() {
 							className="flex flex-wrap gap-4 justify-center lg:justify-start"
 						>
 							<a
-								href="/assets/ORILOYE_TOYYIB_Resume.pdf"
+								href="/assets/2026resume.pdf"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="group inline-flex items-center gap-2 px-6 py-3 bg-blue-600 dark:bg-orange-500 text-white rounded-full font-semibold hover:bg-blue-700 dark:hover:bg-orange-600 transition-all duration-300 shadow-lg shadow-blue-500/25 dark:shadow-orange-500/25"
