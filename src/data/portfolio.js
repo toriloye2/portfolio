@@ -36,15 +36,6 @@ export default [
     link: 'https://bamiji.netlify.app/',
   },
   {
-    id: 5,
-    title: 'Task Tracker',
-    imgUrl: './assets/trello.png',
-    info: 'A Trello-like task management tool with drag-and-drop functionality and a modern, scalable UI.',
-    stack: ['React', 'TypeScript', 'SCSS', 'Ant Design'],
-    category: 'Frontend',
-    link: 'https://apmware.netlify.app/',
-  },
-  {
     id: 6,
     title: 'Park Search',
     imgUrl: './assets/parksearch.png',
